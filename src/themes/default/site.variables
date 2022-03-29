@@ -1,0 +1,3 @@
+@positiveColor           : @dark green;
+@positiveBackgroundColor : @red;
+@negativeColor           : @red;
