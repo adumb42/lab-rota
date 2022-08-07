@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { DateRangePicker } from 'react-dates';
-import { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, crewSixBench, fetchUser } from '../../actions';
+import { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, fetchUser } from '../../actions';
 import { connect } from 'react-redux';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -101,13 +101,11 @@ class RotaHome extends React.Component {
             let crewThreeButton
             let crewFourButton
             let crewFiveButton
-            let crewSixButton
             let backgroundColorOne
             let backgroundColorTwo
             let backgroundColorThree
             let backgroundColorFour
             let backgroundColorFive
-            let backgroundColorSix
 
             if (holiday.crewOneBench === 0 && holiday.crewOne === true) {
                 backgroundColorOne = { "backgroundColor": "silver" }
@@ -192,22 +190,6 @@ class RotaHome extends React.Component {
                 backgroundColorFive = { "backgroundColor": "orange" }
             } if (holiday.crewFiveBench === 7 && holiday.crewFive === true) {
                 backgroundColorFive = { "backgroundColor": "orange" }
-            }
-
-            if (holiday.crewSixBench === 0 && holiday.crewSix === true) {
-                backgroundColorSix = { "backgroundColor": "silver" }
-            } if (holiday.crewSixBench === 1 && holiday.crewSix === true) {
-                backgroundColorSix = { "backgroundColor": "salmon" }
-            } if (holiday.crewSixBench === 2 && holiday.crewSix === true) {
-                backgroundColorSix = { "backgroundColor": "khaki" }
-            } if (holiday.crewSixBench === 3 && holiday.crewSix === true) {
-                backgroundColorSix = { "backgroundColor": "paleturquoise" }
-            } if (holiday.crewSixBench === 4 && holiday.crewSix === true) {
-                backgroundColorSix = { "backgroundColor": "palegreen" }
-            } if (holiday.crewSixBench === 0 && holiday.crewSix === undefined) {
-                backgroundColorSix = { "backgroundColor": "orange" }
-            } if (holiday.crewSixBench === 7 && holiday.crewSix === true) {
-                backgroundColorSix = { "backgroundColor": "orange" }
             }
             
             switch (true) {
@@ -405,47 +387,8 @@ class RotaHome extends React.Component {
                         <option value="1">SDO</option>
                     </select>
             }
-
-            switch (true) {
-                case holiday.crewSix:
-                crewSixButton =
-                <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                    value={holiday.crewSixBench}
-                    onChange={(e) => this.props.crewOneBench(holiday._id, { "crewSixBench": parseInt(e.target.value) })} style={{
-                        "WebkitAppearance": "none",
-                        "MozAppearance": "none",
-                        "textIndent": "1px",
-                        "textOverflow": '',
-                        "border": "none",
-                        "backgroundColor": "transparent"
-                    }}>
-                    <option value="0">NIR</option>
-                    <option value="1">PHX</option>
-                    <option value="2">WS</option>
-                    <option value="3">WWT</option>
-                    <option value="4">UTI</option>
-                    <option value="7">BIOT</option>
-                </select>
-        }
-
-            if (holiday.crewSix === undefined) {
-            crewSixButton =
-                <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                    value={holiday.crewSixBench}
-                    onChange={(e) => this.props.crewOneBench(holiday._id, { "crewSixBench": parseInt(e.target.value) })} style={{
-                        "WebkitAppearance": "none",
-                        "MozAppearance": "none",
-                        "textIndent": "1px",
-                        "textOverflow": '',
-                        "border": "none",
-                        "backgroundColor": "transparent"
-                    }}>
-                    <option value="0">SPT</option>
-                    <option value="1">SDO</option>
-                </select>
-        }
             
-            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix])
+            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive])
 
             while (
                 moment(holiday.date, 'DD-MM-YYYY').valueOf() > moment(this.state.startDate - 86400000) &&
@@ -471,9 +414,6 @@ class RotaHome extends React.Component {
                             <td style={backgroundColorFive}>
                                 {crewFiveButton}
                             </td>
-                            <td style={backgroundColorSix}>
-                                {crewSixButton}
-                            </td>
                             <td>{count}</td>
                         </tr>
                     </tbody>
@@ -492,85 +432,85 @@ class RotaHome extends React.Component {
                 <div className="ui buttons">
                     <button className={this.state.active === "September" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("September")
-                        this.state.startDate =  moment('01-09-2021', 'DD-MM-YYYY')
-                        this.state.endDate = moment('30-09-2021', 'DD-MM-YYYY')
+                        this.state.startDate =  moment('01-09-22', 'DD-MM-YY')
+                        this.state.endDate = moment('30-09-22', 'DD-MM-YY')
                         await this.setState({ focusedInput })
-                        this.printDocument('September 2021')
+                        this.printDocument('September 2022')
                     }}>Sep</button>
                     <button className={this.state.active === "October" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("October")
-                        this.state.startDate = moment('01-10-2021', 'DD-MM-YYYY')
-                        this.state.endDate = moment('31-10-2021', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-10-22', 'DD-MM-YY')
+                        this.state.endDate = moment('31-10-22', 'DD-MM-YY')
                         await this.setState({ focusedInput })
-                        this.printDocument('October 2021')
+                        this.printDocument('October 2022')
                     }}>Oct</button>
                     <button className={this.state.active === "November" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("November")
-                        this.state.startDate = moment('01-11-2021', 'DD-MM-YYYY')
-                        this.state.endDate = moment('30-11-2021', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-11-22', 'DD-MM-YY')
+                        this.state.endDate = moment('30-11-22', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('November 2021')
                     }}>Nov</button>
                     <button className={this.state.active === "December" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("December")
-                        this.state.startDate = moment('01-12-2021', 'DD-MM-YYYY')
-                        this.state.endDate = moment('31-12-2021', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-12-22', 'DD-MM-YY')
+                        this.state.endDate = moment('31-12-22', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('December 2021')
                     }}>Dec</button>
                     <button className={this.state.active === "January" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("January")
-                        this.state.startDate = moment('01-01-2022', 'DD-MM-YYYY')
-                        this.state.endDate = moment('31-01-2022', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-01-23', 'DD-MM-YY')
+                        this.state.endDate = moment('31-01-23', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('January 2022')
                     }}>Jan</button>
                     <button className={this.state.active === "February" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("February")
-                        this.state.startDate = moment('01-02-2022', 'DD-MM-YYYY')
-                        this.state.endDate = moment('28-02-2022', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-02-23', 'DD-MM-YY')
+                        this.state.endDate = moment('28-02-23', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('February 2022')
                     }}>Feb</button>
                     <button className={this.state.active === "March" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("March")
-                        this.state.startDate = moment('01-03-2022', 'DD-MM-YYYY')
-                        this.state.endDate = moment('31-03-2022', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-03-23', 'DD-MM-YY')
+                        this.state.endDate = moment('31-03-23', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('March 2022')
                     }}>Mar</button>
                     <button className={this.state.active === "April" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("April")
-                        this.state.startDate = moment('01-04-2022', 'DD-MM-YYYY')
-                        this.state.endDate = moment('30-04-2022', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-04-23', 'DD-MM-YY')
+                        this.state.endDate = moment('30-04-23', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('April 2022')
                     }}>Apr</button>
                     <button className={this.state.active === "May" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("May")
-                        this.state.startDate = moment('01-05-2022', 'DD-MM-YYYY')
-                        this.state.endDate = moment('31-05-2022', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-05-23', 'DD-MM-YY')
+                        this.state.endDate = moment('31-05-23', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('May 2022')
                     }}>May</button>
                     <button className={this.state.active === "June" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("June")
-                        this.state.startDate = moment('01-06-2022', 'DD-MM-YYYY')
-                        this.state.endDate = moment('30-06-2022', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-06-23', 'DD-MM-YY')
+                        this.state.endDate = moment('30-06-23', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('June 2022')
                     }}>Jun</button>
                     <button className={this.state.active === "July" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("July")
-                        this.state.startDate = moment('01-07-2022', 'DD-MM-YYYY')
-                        this.state.endDate = moment('31-07-2022', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-07-23', 'DD-MM-YY')
+                        this.state.endDate = moment('31-07-23', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('July 2022')
                     }}>Jul</button>
                     <button className={this.state.active === "August" ? "ui basic loading button" : "ui button"} onClick={async (focusedInput) => {
                         this.clickMonthButton("August")
-                        this.state.startDate = moment('01-08-2022', 'DD-MM-YYYY')
-                        this.state.endDate = moment('31-08-2022', 'DD-MM-YYYY')
+                        this.state.startDate = moment('01-08-23', 'DD-MM-YY')
+                        this.state.endDate = moment('31-08-23', 'DD-MM-YY')
                         await this.setState({ focusedInput })
                         this.printDocument('August 2022')
                     }}>Aug</button>
@@ -610,7 +550,6 @@ class RotaHome extends React.Component {
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[2].userName}</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[3].userName}</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[4].userName}</th>
-                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Emma</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Count</th>
                             </tr>
                         </thead>
@@ -633,5 +572,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, crewSixBench, fetchUser }
+    { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, fetchUser }
 )(RotaHome);

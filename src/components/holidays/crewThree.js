@@ -98,9 +98,9 @@ class CrewThree extends React.Component {
 
     render() {
 
-        const booked = this.props.holidays.filter(holiday => holiday.crewThree === false).length
-        const swapsBooked = 117 - this.props.holidays.filter(holiday => holiday.crewThree === null).length
-        const remaining = 32.5 - booked
+        const booked = this.props.holidays.filter(holiday => holiday.crewThree === false && holiday.id > 364).length
+        const swapsBooked = 231 - this.props.holidays.filter(holiday => holiday.crewThree === null).length
+        const remaining = 28.5 - booked
 
         return this.state.hidden ? (
             <div>
@@ -128,7 +128,7 @@ class CrewThree extends React.Component {
                         <div className="content">
                             <div className="header">{this.props.users[2].fullNameOne}</div>
                             <div className="meta">
-                                <span className="category">Summary 21/22</span>
+                                <span className="category">Summary</span>
                             </div>
                             <div className="description">
                                 <p>Holidays Booked: <b>{booked}</b></p>

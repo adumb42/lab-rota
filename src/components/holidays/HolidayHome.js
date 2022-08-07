@@ -87,7 +87,6 @@ class HolidayList extends React.Component {
                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>{this.props.users[2].userName}</th>
                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>{this.props.users[3].userName}</th>
                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>{this.props.users[4].userName}</th>
-                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>Emma</th>
                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>Count</th>
             </tr>
         )
@@ -99,7 +98,7 @@ class HolidayList extends React.Component {
                     moment(holiday.date, 'DD-MM-YYYY').valueOf() >= moment(this.state.startDate - 86400000) &&
                     moment(holiday.date, 'DD-MM-YYYY').valueOf() <= moment(this.state.endDate) 
                 ) {
-            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix])
+            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive])
             let countStyle
                 if (count < 3 && holiday.day !== "Saturday" && holiday.day !== "Sunday") {
                     countStyle = { "background-color": "#FF7663" } 
@@ -113,13 +112,11 @@ class HolidayList extends React.Component {
             let crewThreeButton
             let crewFourButton
             let crewFiveButton
-            let crewSixButton
             let classNameOne
             let classNameTwo
             let classNameThree
             let classNameFour
             let classNameFive
-            let classNameSix
             if (holiday.crewOne === undefined) {
                 classNameOne = "calendar times icon"
             } else if (holiday.crewOne === false) {
@@ -164,15 +161,6 @@ class HolidayList extends React.Component {
                 classNameFive = "calendar icon"
             } else {
                 classNameFive = "calendar outline icon"
-            }
-            if (holiday.crewSix === undefined) {
-                classNameSix = "calendar times icon"
-            } else if (holiday.crewSix === false) {
-                classNameSix = "suitcase icon"
-            } else if (holiday.crewSix === true) {
-                classNameSix = "calendar icon"
-            } else {
-                classNameSix = "calendar outline icon"
             }
             if (holiday.day === "Saturday" || holiday.day === "Sunday") {
                 crewOneButton =
@@ -291,13 +279,6 @@ class HolidayList extends React.Component {
                     <i className={classNameFive}>
                     </i>
                     </button>
-                crewSixButton =
-                    <button className="circular ui icon button"
-                        disabled={holiday.crewSix === null || holiday.crewSix === undefined || this.props.userName !== this.props.users[4].userName}
-                        onClick={() => this.props.nameToggle(holiday._id, { "crewSix": !holiday.crewSix })}>
-                        <i className={classNameSix}>
-                        </i>
-                    </button>
                 }
             return (
                 <tbody className="maintable" key={holiday.id}>
@@ -319,9 +300,6 @@ class HolidayList extends React.Component {
                         <td style={holiday.crewFive === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
                             {crewFiveButton}
                         </td>
-                        <td style={holiday.crewSix === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
-                            {crewSixButton}
-                        </td>
                         <td style={countStyle}>{count}</td>
                     </tr>
                 </tbody>
@@ -333,13 +311,13 @@ class HolidayList extends React.Component {
     renderFilteredHolidays() {
 
         return this.props.holidays.map(holiday => {
-            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix])
+            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive])
             while (
                 moment(holiday.date, 'DD-MM-YYYY').valueOf() >= moment(this.state.startDate - 86400000) &&
                 moment(holiday.date, 'DD-MM-YYYY').valueOf() <= moment(this.state.endDate) &&
                 count < 3 && holiday.day !== "Saturday" && holiday.day !== "Sunday"
             ) {
-                let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix])
+                let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive])
                 let countStyle
                 if (count < 3 && holiday.day !== "Saturday" && holiday.day !== "Sunday") {
                     countStyle = { "background-color": "#FF7663" }
@@ -353,13 +331,11 @@ class HolidayList extends React.Component {
                 let crewThreeButton
                 let crewFourButton
                 let crewFiveButton
-                let crewSixButton
                 let classNameOne
                 let classNameTwo
                 let classNameThree
                 let classNameFour
                 let classNameFive
-                let classNameSix
                 if (holiday.crewOne === undefined) {
                     classNameOne = "calendar times icon"
                 } else if (holiday.crewOne === false) {
@@ -404,15 +380,6 @@ class HolidayList extends React.Component {
                     classNameFive = "calendar icon"
                 } else {
                     classNameFive = "calendar outline icon"
-                }
-                if (holiday.crewSix === undefined) {
-                    classNameSix = "calendar times icon"
-                } else if (holiday.crewSix === false) {
-                    classNameSix = "suitcase icon"
-                } else if (holiday.crewSix === true) {
-                    classNameSix = "calendar icon"
-                } else {
-                    classNameSix = "calendar outline icon"
                 }
                 if (holiday.day === "Saturday" || holiday.day === "Sunday") {
                     crewOneButton =
@@ -521,12 +488,6 @@ class HolidayList extends React.Component {
                             onClick={() => this.props.nameToggle(holiday._id, { "crewFive": !holiday.crewFive })}>
                             <i className={classNameFive}></i>
                         </button>
-                    crewSixButton =
-                        <button className="circular ui icon button"
-                            disabled={holiday.crewSix === null || holiday.crewSix === undefined || this.props.userName !== this.props.users[4].userName}
-                            onClick={() => this.props.nameToggle(holiday._id, { "crewSix": !holiday.crewSix })}>
-                            <i className={classNameSix}></i>
-                        </button>
                 }
                 return (
                     <tbody className="maintable" key={holiday.id}>
@@ -547,9 +508,6 @@ class HolidayList extends React.Component {
                             </td>
                             <td style={holiday.crewFive === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
                                 {crewFiveButton}
-                            </td>
-                            <td style={holiday.crewSix === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
-                                {crewSixButton}
                             </td>
                             <td style={countStyle}>{count}</td>
                         </tr>
