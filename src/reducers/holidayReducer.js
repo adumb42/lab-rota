@@ -9,6 +9,8 @@ import {
     CREW_FOUR_BENCH,
     CREW_FIVE_BENCH,
     CREW_SIX_BENCH,
+    CREW_SEVEN_BENCH,
+    CREW_EIGHT_BENCH,
     CREATE_DAY,
     NAME_TOGGLE
 } from '../actions/types';
@@ -32,6 +34,10 @@ export default (state = {}, action) => {
         case CREW_FIVE_BENCH:
             return { ...state, [action.payload.id]: action.payload };
         case CREW_SIX_BENCH:
+            return { ...state, [action.payload.id]: action.payload };
+        case CREW_SEVEN_BENCH:
+            return { ...state, [action.payload.id]: action.payload };
+        case CREW_EIGHT_BENCH:
             return { ...state, [action.payload.id]: action.payload };
         case CREATE_DAY:
             return { ...state, [action.payload.id]: action.payload };

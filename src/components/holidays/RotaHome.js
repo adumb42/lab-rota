@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { DateRangePicker } from 'react-dates';
-import { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, fetchUser } from '../../actions';
+import { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, crewSixBench, crewSevenBench, crewEightBench, fetchUser } from '../../actions';
 import { connect } from 'react-redux';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -28,6 +28,35 @@ class RotaHome extends React.Component {
             mainWindow.scrollLeft = 0
         };
     };
+
+    onBenchChange = (e, i, id) => {
+        const bArr = ["crewOneBench", "crewTwoBench", "crewThreeBench", "crewFourBench", "crewFiveBench", "crewSixBench", "crewSevenBench", "crewEightBench"]
+        let selectedCrew = bArr[i]
+        if (selectedCrew === "crewOneBench") {
+            this.props.crewOneBench(id, { "crewOneBench": parseInt(e.target.value) })
+        }
+        if (selectedCrew === "crewTwoBench") {
+            this.props.crewTwoBench(id, { "crewTwoBench": parseInt(e.target.value) })
+        }
+        if (selectedCrew === "crewThreeBench") {
+            this.props.crewThreeBench(id, { "crewThreeBench": parseInt(e.target.value) })
+        }
+        if (selectedCrew === "crewFourBench") {
+            this.props.crewFourBench(id, { "crewFourBench": parseInt(e.target.value) })
+        }
+        if (selectedCrew === "crewFiveBench") {
+            this.props.crewFiveBench(id, { "crewFiveBench": parseInt(e.target.value) })
+        }
+        if (selectedCrew === "crewSixBench") {
+            this.props.crewSixBench(id, { "crewSixBench": parseInt(e.target.value) })
+        }
+        if (selectedCrew === "crewSevenBench") {
+            this.props.crewSevenBench(id, { "crewSevenBench": parseInt(e.target.value) })
+        }
+        else if (selectedCrew === "crewEightBench") {
+            this.props.crewEightBench(id, { "crewEightBench": parseInt(e.target.value) })
+        }
+    }
 
     handleScroll = () => {
         const mainWindow = document.getElementById('divToPrint');
@@ -101,294 +130,72 @@ class RotaHome extends React.Component {
             let crewThreeButton
             let crewFourButton
             let crewFiveButton
-            let backgroundColorOne
-            let backgroundColorTwo
-            let backgroundColorThree
-            let backgroundColorFour
-            let backgroundColorFive
+            let crewSixButton
+            let crewSevenButton
+            let crewEightButton
+            const benchArr = [holiday.crewOneBench, holiday.crewTwoBench, holiday.crewThreeBench, holiday.crewFourBench, holiday.crewFiveBench, holiday.crewSixBench, holiday.crewSevenBench, holiday.crewEightBench]
+            const crewArr = [holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix, holiday.crewSeven, holiday.crewEight]
+            const buttonArr = [crewOneButton, crewTwoButton, crewThreeButton, crewFourButton, crewFiveButton, crewSixButton, crewSevenButton, crewEightButton]
+            const backgroundColorArr = [ {}, {}, {}, {}, {}, {}, {}, {}]
+            const colourArray = ["silver", "salmon", "khaki", "paleturquoise", "palegreen", "#ffb6c1", "grey", "#b8e6bf", "#d4af37", "red"]
+            const crewArrLength = crewArr.length
+            const colourArrayLength = colourArray.length
+            const buttonArrLength = buttonArr.length
 
-            if (holiday.crewOneBench === 0 && holiday.crewOne === true) {
-                backgroundColorOne = { "backgroundColor": "silver" }
-            } if (holiday.crewOneBench === 1 && holiday.crewOne === true) {
-                backgroundColorOne = { "backgroundColor": "salmon" }
-            } if (holiday.crewOneBench === 2 && holiday.crewOne === true) {
-                backgroundColorOne = { "backgroundColor": "khaki" }
-            } if (holiday.crewOneBench === 3 && holiday.crewOne === true) {
-                backgroundColorOne = { "backgroundColor": "paleturquoise" }
-            } if (holiday.crewOneBench === 4 && holiday.crewOne === true) {
-                backgroundColorOne = { "backgroundColor": "palegreen" }
-            } if (holiday.crewOneBench === 0 && holiday.crewOne === undefined) {
-                backgroundColorOne = { "backgroundColor": "orange" }
-            } if (holiday.crewOneBench === 7 && holiday.crewOne === true) {
-                backgroundColorOne = { "backgroundColor": "orange" }
+            for (let i = 0; i < crewArrLength; i++) {
+                if (crewArr[i]) {
+                    for (let j = 0;  j < colourArrayLength; j++) {
+                        if (benchArr[i] === j && crewArr[i] === true) {
+                            backgroundColorArr[i] = { "backgroundColor": `${colourArray[j]}` }
+                        }
+                    }
+                } else if (crewArr[i] === undefined) {
+                    backgroundColorArr[i] = { "backgroundColor": "orange" }
+                }
             }
+
+            for (let i = 0; i < buttonArrLength; i++) {
+                if (crewArr[i]) {
+                    buttonArr[i] =
+                        <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
+                            value={benchArr[i]}
+                            onChange={(e) => this.onBenchChange(e, i, holiday._id)} style={{
+                                "WebkitAppearance": "none",
+                                "MozAppearance": "none",
+                                "textIndent": "1px",
+                                "textOverflow": '',
+                                "border": "none",
+                                "backgroundColor": "transparent"
+                            }}>
+                            <option value="0">LOTF</option>
+                            <option value="1">PHX</option>
+                            <option value="2">WS</option>
+                            <option value="3">WWT</option>
+                            <option value="4">UTI</option>
+                            <option value="5">OSS</option>
+                            <option value="7">WILM</option>
+                            <option value="8">PROCM</option>
+                            <option value="9">FLEX</option>
+                        </select>
+                    }
+                else if (crewArr[i] === undefined) {
+                    buttonArr[i] = 
+                        <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
+                            value={benchArr[i]}
+                            onChange={(e) => this.onBenchChange(e, i, holiday._id)} style={{
+                                "WebkitAppearance": "none",
+                                "MozAppearance": "none",
+                                "textIndent": "1px",
+                                "textOverflow": '',
+                                "border": "none",
+                                "backgroundColor": "transparent"
+                            }}>
+                            <option value="0">SPT</option>
+                        </select>
+                    }
+                }
             
-
-            if (holiday.crewTwoBench === 0 && holiday.crewTwo === true) {
-                backgroundColorTwo = { "backgroundColor": "silver" }
-            } if (holiday.crewTwoBench === 1 && holiday.crewTwo === true) {
-                backgroundColorTwo = { "backgroundColor": "salmon" }
-            } if (holiday.crewTwoBench === 2 && holiday.crewTwo === true) {
-                backgroundColorTwo = { "backgroundColor": "khaki" }
-            } if (holiday.crewTwoBench === 3 && holiday.crewTwo === true) {
-                backgroundColorTwo = { "backgroundColor": "paleturquoise" }
-            } if (holiday.crewTwoBench === 4 && holiday.crewTwo === true) {
-                backgroundColorTwo = { "backgroundColor": "palegreen" }
-            } if (holiday.crewTwoBench === 0 && holiday.crewTwo === undefined) {
-                backgroundColorTwo = { "backgroundColor": "orange" }
-            } if (holiday.crewTwoBench === 7 && holiday.crewTwo === true) {
-                backgroundColorTwo = { "backgroundColor": "orange" }
-            }
-
-            if (holiday.crewThreeBench === 0 && holiday.crewThree === true) {
-                backgroundColorThree = { "backgroundColor": "silver" }
-            } if (holiday.crewThreeBench === 1 && holiday.crewThree === true) {
-                backgroundColorThree = { "backgroundColor": "salmon" }
-            } if (holiday.crewThreeBench === 2 && holiday.crewThree === true) {
-                backgroundColorThree = { "backgroundColor": "khaki" }
-            } if (holiday.crewThreeBench === 3 && holiday.crewThree === true) {
-                backgroundColorThree = { "backgroundColor": "paleturquoise" }
-            } if (holiday.crewThreeBench === 4 && holiday.crewThree === true) {
-                backgroundColorThree = { "backgroundColor": "palegreen" }
-            } if (holiday.crewThreeBench === 0 && holiday.crewThree === undefined) {
-                backgroundColorThree = { "backgroundColor": "orange" }
-            } if (holiday.crewThreeBench === 7 && holiday.crewThree === true) {
-                backgroundColorThree = { "backgroundColor": "orange" }
-            }
-
-            if (holiday.crewFourBench === 0 && holiday.crewFour === true) {
-                backgroundColorFour = { "backgroundColor": "silver" }
-            } if (holiday.crewFourBench === 1 && holiday.crewFour === true) {
-                backgroundColorFour = { "backgroundColor": "salmon" }
-            } if (holiday.crewFourBench === 2 && holiday.crewFour === true) {
-                backgroundColorFour = { "backgroundColor": "khaki" }
-            } if (holiday.crewFourBench === 3 && holiday.crewFour === true) {
-                backgroundColorFour = { "backgroundColor": "paleturquoise" }
-            } if (holiday.crewFourBench === 4 && holiday.crewFour === true) {
-                backgroundColorFour = { "backgroundColor": "palegreen" }
-            } if (holiday.crewFourBench === 0 && holiday.crewFour === undefined) {
-                backgroundColorFour = { "backgroundColor": "orange" }
-            } if (holiday.crewFourBench === 6 && holiday.crewFour === true) {
-                backgroundColorFour = { "backgroundColor": "grey" }
-            } if (holiday.crewFourBench === 7 && holiday.crewFour === true) {
-                backgroundColorFour = { "backgroundColor": "orange" }
-            } if (holiday.crewFourBench === 8 && holiday.crewFour === true) {
-                backgroundColorFour = { "backgroundColor": "orange" }
-            }
-
-            if (holiday.crewFiveBench === 0 && holiday.crewFive === true) {
-                backgroundColorFive = { "backgroundColor": "silver" }
-            } if (holiday.crewFiveBench === 1 && holiday.crewFive === true) {
-                backgroundColorFive = { "backgroundColor": "salmon" }
-            } if (holiday.crewFiveBench === 2 && holiday.crewFive === true) {
-                backgroundColorFive = { "backgroundColor": "khaki" }
-            } if (holiday.crewFiveBench === 3 && holiday.crewFive === true) {
-                backgroundColorFive = { "backgroundColor": "paleturquoise" }
-            } if (holiday.crewFiveBench === 4 && holiday.crewFive === true) {
-                backgroundColorFive = { "backgroundColor": "palegreen" }
-            } if (holiday.crewFiveBench === 0 && holiday.crewFive === undefined) {
-                backgroundColorFive = { "backgroundColor": "orange" }
-            } if (holiday.crewFiveBench === 7 && holiday.crewFive === true) {
-                backgroundColorFive = { "backgroundColor": "orange" }
-            }
-            
-            switch (true) {
-                case holiday.crewOne:
-                    crewOneButton =
-                        <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                            value={holiday.crewOneBench}
-                            onChange={(e) => this.props.crewOneBench(holiday._id, { "crewOneBench": parseInt(e.target.value) })} style={{
-                                "WebkitAppearance": "none",
-                                "MozAppearance": "none",
-                                "textIndent": "1px",
-                                "textOverflow": '',
-                                "border": "none",
-                                "backgroundColor": "transparent"
-                            }}>
-                            <option value="0">NIR</option>
-                            <option value="1">PHX</option>
-                            <option value="2">WS</option>
-                            <option value="3">WWT</option>
-                            <option value="4">UTI</option>
-                            <option value="7">BIOT</option>
-                        </select>
-            }
-
-            if (holiday.crewOne === undefined) {
-                crewOneButton =
-                    <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                        value={holiday.crewOneBench}
-                        onChange={(e) => this.props.crewOneBench(holiday._id, { "crewOneBench": parseInt(e.target.value) })} style={{
-                            "WebkitAppearance": "none",
-                            "MozAppearance": "none",
-                            "textIndent": "1px",
-                            "textOverflow": '',
-                            "border": "none",
-                            "backgroundColor": "transparent"
-                        }}>
-                        <option value="0">SPT</option>
-                        <option value="1">SDO</option>
-                    </select>
-            }
-
-            switch (true) {
-                case holiday.crewTwo:
-                    crewTwoButton =
-                        <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                            value={holiday.crewTwoBench}
-                            onChange={(e) => this.props.crewOneBench(holiday._id, { "crewTwoBench": parseInt(e.target.value) })} style={{
-                                "WebkitAppearance": "none",
-                                "MozAppearance": "none",
-                                "textIndent": "1px",
-                                "textOverflow": '',
-                                "border": "none",
-                                "backgroundColor": "transparent"
-                            }}>
-                            <option value="0">NIR</option>
-                            <option value="1">PHX</option>
-                            <option value="2">WS</option>
-                            <option value="3">WWT</option>
-                            <option value="4">UTI</option>
-                            <option value="7">BIOT</option>
-                        </select>  
-            }
-
-            if (holiday.crewTwo === undefined) {
-                crewTwoButton =
-                    <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                        value={holiday.crewTwoBench}
-                        onChange={(e) => this.props.crewOneBench(holiday._id, { "crewTwoBench": parseInt(e.target.value) })} style={{
-                            "WebkitAppearance": "none",
-                            "MozAppearance": "none",
-                            "textIndent": "1px",
-                            "textOverflow": '',
-                            "border": "none",
-                            "backgroundColor": "transparent"
-                        }}>
-                        <option value="0">SPT</option>
-                        <option value="1">SDO</option>
-                    </select>
-            }
-                
-            switch (true) {
-                case holiday.crewThree:
-                    crewThreeButton =
-                        <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                            value={holiday.crewThreeBench}
-                            onChange={(e) => this.props.crewOneBench(holiday._id, { "crewThreeBench": parseInt(e.target.value) })} style={{
-                                "WebkitAppearance": "none",
-                                "MozAppearance": "none",
-                                "textIndent": "1px",
-                                "textOverflow": '',
-                                "border": "none",
-                                "backgroundColor": "transparent"
-                            }}>
-                            <option value="0">NIR</option>
-                            <option value="1">PHX</option>
-                            <option value="2">WS</option>
-                            <option value="3">WWT</option>
-                            <option value="4">UTI</option>
-                            <option value="7">BIOT</option>
-                        </select>
-            }
-
-            if (holiday.crewThree === undefined) {
-                crewThreeButton =
-                    <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                        value={holiday.crewThreeBench}
-                        onChange={(e) => this.props.crewOneBench(holiday._id, { "crewThreeBench": parseInt(e.target.value) })} style={{
-                            "WebkitAppearance": "none",
-                            "MozAppearance": "none",
-                            "textIndent": "1px",
-                            "textOverflow": '',
-                            "border": "none",
-                            "backgroundColor": "transparent"
-                        }}>
-                        <option value="0">SPT</option>
-                        <option value="1">SDO</option>
-                    </select>
-            }
-                
-            switch (true) {
-                case holiday.crewFour:
-                    crewFourButton =
-                        <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                            value={holiday.crewFourBench}
-                            onChange={(e) => this.props.crewOneBench(holiday._id, { "crewFourBench": parseInt(e.target.value) })} style={{
-                                "WebkitAppearance": "none",
-                                "MozAppearance": "none",
-                                "textIndent": "1px",
-                                "textOverflow": '',
-                                "border": "none",
-                                "backgroundColor": "transparent"
-                            }}>
-                            <option value="0">NIR</option>
-                            <option value="1">PHX</option>
-                            <option value="2">WS</option>
-                            <option value="3">WWT</option>
-                            <option value="4">UTI</option>
-                            <option value="7">TACT</option>
-                            <option value="8">BIOT</option>
-                        </select>
-            }
-
-            if (holiday.crewFour === undefined) {
-                crewFourButton =
-                    <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                        value={holiday.crewFourBench}
-                        onChange={(e) => this.props.crewOneBench(holiday._id, { "crewFourBench": parseInt(e.target.value) })} style={{
-                            "WebkitAppearance": "none",
-                            "MozAppearance": "none",
-                            "textIndent": "1px",
-                            "textOverflow": '',
-                            "border": "none",
-                            "backgroundColor": "transparent"
-                        }}>
-                        <option value="0">SPT</option>
-                        <option value="1">SDO</option>
-                    </select>
-            }
-                
-            switch (true) {
-                case holiday.crewFive:
-                    crewFiveButton =
-                        <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                            value={holiday.crewFiveBench}
-                            onChange={(e) => this.props.crewOneBench(holiday._id, { "crewFiveBench": parseInt(e.target.value) })} style={{
-                                "WebkitAppearance": "none",
-                                "MozAppearance": "none",
-                                "textIndent": "1px",
-                                "textOverflow": '',
-                                "border": "none",
-                                "backgroundColor": "transparent"
-                            }}>
-                            <option value="0">NIR</option>
-                            <option value="1">PHX</option>
-                            <option value="2">WS</option>
-                            <option value="3">WWT</option>
-                            <option value="4">UTI</option>
-                            <option value="7">BIOT</option>
-                        </select>
-            }
-
-            if (holiday.crewFive === undefined) {
-                crewFiveButton =
-                    <select className={this.props.userName !== "Admin" ? "disabled ui dropdown" : "ui dropdown"}
-                        value={holiday.crewFiveBench}
-                        onChange={(e) => this.props.crewOneBench(holiday._id, { "crewFiveBench": parseInt(e.target.value) })} style={{
-                            "WebkitAppearance": "none",
-                            "MozAppearance": "none",
-                            "textIndent": "1px",
-                            "textOverflow": '',
-                            "border": "none",
-                            "backgroundColor": "transparent"
-                        }}>
-                        <option value="0">SPT</option>
-                        <option value="1">SDO</option>
-                    </select>
-            }
-            
-            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive])
+            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix, holiday.crewSeven, holiday.crewEight])
 
             while (
                 moment(holiday.date, 'DD-MM-YYYY').valueOf() > moment(this.state.startDate - 86400000) &&
@@ -399,20 +206,29 @@ class RotaHome extends React.Component {
                         <tr>
                             <td>{holiday.date}</td>
                             <td>{holiday.day}</td>
-                            <td style={backgroundColorOne}>
-                                {crewOneButton}
+                            <td style={backgroundColorArr[0]}>
+                                {buttonArr[0]}
                             </td>
-                            <td style={backgroundColorTwo}>
-                                {crewTwoButton}
+                            <td style={backgroundColorArr[1]}>
+                                {buttonArr[1]}
                             </td>
-                            <td style={backgroundColorThree}>
-                                {crewThreeButton}
+                            <td style={backgroundColorArr[2]}>
+                                {buttonArr[2]}
                             </td>
-                            <td style={backgroundColorFour}>
-                                {crewFourButton}
+                            <td style={backgroundColorArr[3]}>
+                                {buttonArr[3]}
                             </td>
-                            <td style={backgroundColorFive}>
-                                {crewFiveButton}
+                            <td style={backgroundColorArr[4]}>
+                                {buttonArr[4]}
+                            </td>
+                            <td style={backgroundColorArr[5]}>
+                                {buttonArr[5]}
+                            </td>
+                            <td style={backgroundColorArr[6]}>
+                                {buttonArr[6]}
+                            </td>
+                            <td style={backgroundColorArr[7]}>
+                                {buttonArr[7]}
                             </td>
                             <td>{count}</td>
                         </tr>
@@ -550,6 +366,9 @@ class RotaHome extends React.Component {
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[2].userName}</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[3].userName}</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[4].userName}</th>
+                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Joe B</th>
+                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Daiva</th>
+                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>A N Other</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Count</th>
                             </tr>
                         </thead>
@@ -572,5 +391,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, fetchUser }
+    { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, crewSixBench, crewSevenBench, crewEightBench,fetchUser }
 )(RotaHome);

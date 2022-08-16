@@ -15,6 +15,8 @@ import {
     CREW_FOUR_BENCH,
     CREW_FIVE_BENCH,
     CREW_SIX_BENCH,
+    CREW_SEVEN_BENCH,
+    CREW_EIGHT_BENCH,
     CREATE_DAY,
     DATE_TOGGLE,
     FETCH_DATE,
@@ -118,6 +120,18 @@ export const crewSixBench = (id, crewSixBench) => async dispatch => {
     const response = await holidays.patch(`/holidays/${id}`, crewSixBench);
 
     dispatch({ type: CREW_SIX_BENCH, payload: response.data })
+}
+
+export const crewSevenBench = (id, crewSevenBench) => async dispatch => {
+    const response = await holidays.patch(`/holidays/${id}`, crewSevenBench);
+
+    dispatch({ type: CREW_SEVEN_BENCH, payload: response.data })
+}
+
+export const crewEightBench = (id, crewEightBench) => async dispatch => {
+    const response = await holidays.patch(`/holidays/${id}`, crewEightBench);
+
+    dispatch({ type: CREW_EIGHT_BENCH, payload: response.data })
 }
 
 export const createDay = (date, day, John, Emily, Ryan, Alex, LeAnne, id) => async dispatch => {
