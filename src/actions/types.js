@@ -13,6 +13,7 @@ export const CREW_FIVE_BENCH = 'CREW_FIVE_BENCH';
 export const CREW_SIX_BENCH = 'CREW_SIX_BENCH';
 export const CREW_SEVEN_BENCH = 'CREW_SEVEN_BENCH';
 export const CREW_EIGHT_BENCH = 'CREW_EIGHT_BENCH';
+export const CREW_NINE_BENCH = 'CREW_NINE_BENCH';
 export const CREATE_DAY = 'CREATE_DAY';
 export const DATE_TOGGLE = 'DATE_TOGGLE';
 export const FETCH_DATE = 'FETCH_DATE';

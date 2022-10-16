@@ -12,7 +12,8 @@ class HolidayList extends React.Component {
     constructor(props) {
         super(props);
         this.toggleDayCount = this.toggleDayCount.bind(this)
-        this.state = { startDate: null, endDate: null, filterCount: '' }
+        this.toggleEditMode = this.toggleEditMode.bind(this)
+        this.state = { startDate: null, endDate: null, filterCount: '', editModeValue: 'Edit Mode Off' };
     }
 
     handleDateSubmit = () => {
@@ -77,6 +78,126 @@ class HolidayList extends React.Component {
         }
     }
 
+    toggleEditMode = () => {
+        if(this.state.editModeValue === 'Edit Mode Off') {
+            this.setState(() => ({ editModeValue: 'Add Day' }))
+        } else if (this.state.editModeValue === 'Add Day') {
+            this.setState(() => ({ editModeValue: 'Remove Day' }))
+        } else if (this.state.editModeValue === 'Remove Day') {
+            this.setState(() => ({ editModeValue: 'Add Holiday' }))
+        } else if (this.state.editModeValue === 'Add Holiday') {
+            this.setState(() => ({ editModeValue: 'Add Support Day' }))
+        } else if (this.state.editModeValue === 'Add Support Day') {
+            this.setState(() => ({ editModeValue: 'Edit Mode Off' }))
+        }
+    }
+
+    onClickFunction = (crewNumber, id) => {
+        if (crewNumber === 1) {
+            console.log('this has run')
+            if (this.state.editModeValue === 'Add Day') {
+                console.log('this has run')
+                this.props.nameToggle(id, { "crewOne": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewOne": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewOne": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewOne": '' })
+            }
+        }
+        if (crewNumber === 2) {
+            if (this.state.editModeValue === 'Add Day') {
+                this.props.nameToggle(id, { "crewTwo": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewTwo": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewTwo": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewTwo": '' })
+            }
+        }
+        if (crewNumber === 3) {
+            if (this.state.editModeValue === 'Add Day') {
+                this.props.nameToggle(id, { "crewThree": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewThree": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewThree": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewThree": '' })
+            }
+        }
+        if (crewNumber === 4) {
+            if (this.state.editModeValue === 'Add Day') {
+                this.props.nameToggle(id, { "crewFour": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewFour": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewFour": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewFour": '' })
+            }
+        }
+        if (crewNumber === 5) {
+            if (this.state.editModeValue === 'Add Day') {
+                this.props.nameToggle(id, { "crewFive": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewFive": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewFive": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewFive": '' })
+            }
+        }
+        if (crewNumber === 6) {
+            if (this.state.editModeValue === 'Add Day') {
+                this.props.nameToggle(id, { "crewSix": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewSix": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewSix": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewSix": '' })
+            }
+        }
+        if (crewNumber === 7) {
+            if (this.state.editModeValue === 'Add Day') {
+                this.props.nameToggle(id, { "crewSeven": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewSeven": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewSeven": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewSeven": '' })
+            }
+        }
+        if (crewNumber === 8) {
+            if (this.state.editModeValue === 'Add Day') {
+                this.props.nameToggle(id, { "crewEight": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewEight": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewEight": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewEight": '' })
+            }
+        }
+        if (crewNumber === 9) {
+            if (this.state.editModeValue === 'Add Day') {
+                console.log('Attempting function')
+                this.props.nameToggle(id, { "crewNine": true })
+            } else if (this.state.editModeValue === 'Remove Day') {
+                this.props.nameToggle(id, { "crewNine": null })
+            } else if (this.state.editModeValue === 'Add Holiday') {
+                this.props.nameToggle(id, { "crewNine": false })
+            } else if (this.state.editModeValue === 'Add Support Day') {
+                this.props.nameToggle(id, { "crewNine": '' })
+            }
+        }
+        
+    }
+
     renderTableHeader() {
         return (
             <tr>
@@ -87,6 +208,10 @@ class HolidayList extends React.Component {
                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>{this.props.users[2].userName}</th>
                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>{this.props.users[3].userName}</th>
                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>{this.props.users[4].userName}</th>
+                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>Joe</th>
+                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>Daiva</th>
+                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>Agnieszka</th>
+                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>Elaine</th>
                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 6 }}>Count</th>
             </tr>
         )
@@ -98,7 +223,7 @@ class HolidayList extends React.Component {
                     moment(holiday.date, 'DD-MM-YYYY').valueOf() >= moment(this.state.startDate - 86400000) &&
                     moment(holiday.date, 'DD-MM-YYYY').valueOf() <= moment(this.state.endDate) 
                 ) {
-            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive])
+            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix, holiday.crewSeven, holiday.crewEight, holiday.crewNine])
             let countStyle
                 if (count < 3 && holiday.day !== "Saturday" && holiday.day !== "Sunday") {
                     countStyle = { "background-color": "#FF7663" } 
@@ -112,11 +237,19 @@ class HolidayList extends React.Component {
             let crewThreeButton
             let crewFourButton
             let crewFiveButton
+            let crewSixButton
+            let crewSevenButton
+            let crewEightButton
+            let crewNineButton
             let classNameOne
             let classNameTwo
             let classNameThree
             let classNameFour
             let classNameFive
+            let classNameSix
+            let classNameSeven
+            let classNameEight
+            let classNameNine
             if (holiday.crewOne === undefined) {
                 classNameOne = "calendar times icon"
             } else if (holiday.crewOne === false) {
@@ -161,6 +294,42 @@ class HolidayList extends React.Component {
                 classNameFive = "calendar icon"
             } else {
                 classNameFive = "calendar outline icon"
+            }
+            if (holiday.crewSix === undefined) {
+                classNameSix = "calendar times icon"
+            } else if (holiday.crewSix === false) {
+                classNameSix = "suitcase icon"
+            } else if (holiday.crewFive === true) {
+                classNameSix = "calendar icon"
+            } else {
+                classNameSix = "calendar outline icon"
+            }
+            if (holiday.crewSeven === undefined) {
+                classNameSeven = "calendar times icon"
+            } else if (holiday.crewSeven === false) {
+                classNameSeven = "suitcase icon"
+            } else if (holiday.crewSeven === true) {
+                classNameSeven = "calendar icon"
+            } else {
+                classNameSeven = "calendar outline icon"
+            }
+            if (holiday.crewEight === undefined) {
+                classNameEight = "calendar times icon"
+            } else if (holiday.crewEight === false) {
+                classNameEight = "suitcase icon"
+            } else if (holiday.crewEight === true) {
+                classNameEight = "calendar icon"
+            } else {
+                classNameEight = "calendar outline icon"
+            }
+            if (holiday.crewNine === undefined) {
+                classNameNine = "calendar times icon"
+            } else if (holiday.crewNine === false) {
+                classNameNine = "suitcase icon"
+            } else if (holiday.crewNine === true) {
+                classNameNine = "calendar icon"
+            } else {
+                classNameNine = "calendar outline icon"
             }
             if (holiday.day === "Saturday" || holiday.day === "Sunday") {
                 crewOneButton =
@@ -243,41 +412,180 @@ class HolidayList extends React.Component {
                                     holiday.crewFive === "" ? "calendar times icon" : "calendar outline icon"))}>
                         </i>
                     </Link>
+                crewSixButton =
+                    <Link
+                        to={{
+                            pathname: `/swap/${holiday.id}`,
+                            state: {
+                                name: 'Joe',
+                                id: holiday._id
+                            }
+                        }}
+                        className={this.props.userName !== 'Admin'|| holiday.crewSix !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                        <i className={
+                            holiday.crewSix === true ? "calendar icon" :
+                                (holiday.crewSix === false ? "calendar suitcase icon" : (
+                                    holiday.crewSix === "" ? "calendar times icon" : "calendar outline icon"))}>
+                        </i>
+                    </Link>
+                crewSevenButton =
+                    <Link
+                        to={{
+                            pathname: `/swap/${holiday.id}`,
+                            state: {
+                                name: 'Daiva',
+                                id: holiday._id
+                            }
+                        }}
+                        className={this.props.userName !== 'Admin' || holiday.crewSeven !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                        <i className={
+                            holiday.crewSeven === true ? "calendar icon" :
+                                (holiday.crewSeven === false ? "calendar suitcase icon" : (
+                                    holiday.crewSeven === "" ? "calendar times icon" : "calendar outline icon"))}>
+                        </i>
+                    </Link>
+                crewEightButton =
+                    <Link
+                        to={{
+                            pathname: `/swap/${holiday.id}`,
+                            state: {
+                                name: 'Agnieszka',
+                                id: holiday._id
+                            }
+                        }}
+                        className={this.props.userName !== 'Admin' || holiday.crewEight !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                        <i className={
+                            holiday.crewEight === true ? "calendar icon" :
+                                (holiday.crewEight === false ? "calendar suitcase icon" : (
+                                    holiday.crewEight === "" ? "calendar times icon" : "calendar outline icon"))}>
+                        </i>
+                    </Link>
                 } else {
                 crewOneButton = 
                     <button className="circular ui icon button"
-                        disabled={holiday.crewOne === null || holiday.crewOne === undefined || this.props.userName !== this.props.users[0].userName}
-                        onClick={() => this.props.nameToggle(holiday._id, { "crewOne": !holiday.crewOne })}>
+                        disabled={holiday.crewOne === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewOne === undefined || this.props.userName !== this.props.users[0].userName && this.state.editModeValue === 'Edit Mode Off'}
+                        onClick={() => { 
+                            if (this.state.editModeValue === 'Edit Mode Off') {
+                                this.props.nameToggle(holiday._id, { "crewOne": !holiday.crewOne })  
+                            } else {
+                                this.onClickFunction(1, holiday._id)
+                            } 
+                        }}>
                     <i className={classNameOne}>
                     </i>
                     </button>
                 crewTwoButton =
                     <button className="circular ui icon button"
-                        disabled={holiday.crewTwo === null || holiday.crewTwo === undefined || this.props.userName !== this.props.users[1].userName}
-                        onClick={() => this.props.nameToggle(holiday._id, { "crewTwo": !holiday.crewTwo })}>
+                        disabled={holiday.crewTwo === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewTwo === undefined || this.props.userName !== this.props.users[1].userName && this.state.editModeValue === 'Edit Mode Off'}
+                        onClick={() => {
+                            if (this.state.editModeValue === 'Edit Mode Off') {
+                                this.props.nameToggle(holiday._id, { "crewTwo": !holiday.crewTwo })
+                            } else {
+                                this.onClickFunction(2, holiday._id)
+                            }
+                        }}>
                     <i className={classNameTwo}>
                     </i>
                     </button>
                 crewThreeButton =
                     <button className="circular ui icon button"
-                        disabled={holiday.crewThree === null || holiday.crewThree === undefined || this.props.userName !== this.props.users[2].userName}
-                        onClick={() => this.props.nameToggle(holiday._id, { "crewThree": !holiday.crewThree })}>
+                        disabled={holiday.crewThree === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewThree === undefined || this.props.userName !== this.props.users[2].userName && this.state.editModeValue === 'Edit Mode Off'}
+                        onClick={() => {
+                            if (this.state.editModeValue === 'Edit Mode Off') {
+                                this.props.nameToggle(holiday._id, { "crewThree": !holiday.crewThree })
+                            } else {
+                                this.onClickFunction(3, holiday._id)
+                            }
+                        }}>
                     <i className={classNameThree}>
                     </i>
                     </button>
                 crewFourButton =
                     <button className="circular ui icon button"
-                        disabled={holiday.crewFour === null || holiday.crewFour === undefined || this.props.userName !== this.props.users[3].userName}
-                        onClick={() => this.props.nameToggle(holiday._id, { "crewFour": !holiday.crewFour })}>
+                        disabled={holiday.crewFour === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewFour === undefined || this.props.userName !== this.props.users[3].userName && this.state.editModeValue === 'Edit Mode Off'}
+                        onClick={() => {
+                            if (this.state.editModeValue === 'Edit Mode Off') {
+                                this.props.nameToggle(holiday._id, { "crewFour": !holiday.crewFour })
+                            } else {
+                                this.onClickFunction(4, holiday._id)
+                            }
+                        }}>
                     <i className={classNameFour}>
                     </i>
                     </button>
                 crewFiveButton =
                     <button className="circular ui icon button"
-                        disabled={holiday.crewFive === null || holiday.crewFive === undefined || this.props.userName !== this.props.users[4].userName}
-                        onClick={() => this.props.nameToggle(holiday._id, { "crewFive": !holiday.crewFive })}>
+                        disabled={holiday.crewFive === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewFive === undefined || this.props.userName !== this.props.users[4].userName && this.state.editModeValue === 'Edit Mode Off'}
+                        onClick={() => {
+                            if (this.state.editModeValue === 'Edit Mode Off') {
+                                this.props.nameToggle(holiday._id, { "crewFive": !holiday.crewFive })
+                            } else {
+                                this.onClickFunction(5, holiday._id)
+                            }
+                        }}>
                     <i className={classNameFive}>
                     </i>
+                    </button>
+                crewSixButton =
+                    <Link
+                        to={{
+                            pathname: `/swap/${holiday.id}`,
+                            state: {
+                                name: 'Joe',
+                                id: holiday._id
+                            }
+                        }}
+                        className={this.props.userName !== 'Admin' || holiday.crewSix !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                        <i className={
+                            holiday.crewSix === true ? "calendar icon" :
+                                (holiday.crewSix === false ? "calendar suitcase icon" : (
+                                    holiday.crewSix === "" ? "calendar times icon" : "calendar outline icon"))}>
+                        </i>
+                    </Link>
+                crewSevenButton =
+                    <Link
+                        to={{
+                            pathname: `/swap/${holiday.id}`,
+                            state: {
+                                name: 'Daiva',
+                                id: holiday._id
+                            }
+                        }}
+                        className={this.props.userName !== 'Admin' || holiday.crewSeven !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                        <i className={
+                            holiday.crewSeven === true ? "calendar icon" :
+                                (holiday.crewSeven === false ? "calendar suitcase icon" : (
+                                    holiday.crewSeven === "" ? "calendar times icon" : "calendar outline icon"))}>
+                        </i>
+                    </Link>
+                crewEightButton =
+                    <Link
+                        to={{
+                            pathname: `/swap/${holiday.id}`,
+                            state: {
+                                name: 'Agnieszka',
+                                id: holiday._id
+                            }
+                        }}
+                        className={this.props.userName !== 'Admin' || holiday.crewEight !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                        <i className={
+                            holiday.crewEight === true ? "calendar icon" :
+                                (holiday.crewEight === false ? "calendar suitcase icon" : (
+                                    holiday.crewEight === "" ? "calendar times icon" : "calendar outline icon"))}>
+                        </i>
+                    </Link>
+                crewNineButton =
+                    <button className="circular ui icon button"
+                        disabled={holiday.crewNine === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewNine === undefined || this.props.userName !== 'Elaine' && this.state.editModeValue === 'Edit Mode Off'}
+                        onClick={() => {
+                            if (this.state.editModeValue === 'Edit Mode Off') {
+                                this.props.nameToggle(holiday._id, { "crewNine": !holiday.crewNine })
+                            } else {
+                                this.onClickFunction(9, holiday._id)
+                            }
+                        }}>
+                        <i className={classNameNine}>
+                        </i>
                     </button>
                 }
             return (
@@ -299,6 +607,18 @@ class HolidayList extends React.Component {
                         </td>
                         <td style={holiday.crewFive === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
                             {crewFiveButton}
+                        </td>
+                        <td style={holiday.crewSix === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
+                            {crewSixButton}
+                        </td>
+                        <td style={holiday.crewSeven === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
+                            {crewSevenButton}
+                        </td>
+                        <td style={holiday.crewEight === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
+                            {crewEightButton}
+                        </td>
+                        <td style={holiday.crewNine === true ? { "background-color": "#58E162" } : { "background-color": "#FF7663" }}>
+                            {crewNineButton}
                         </td>
                         <td style={countStyle}>{count}</td>
                     </tr>
@@ -535,6 +855,10 @@ class HolidayList extends React.Component {
                         displayFormat={() => "DD-MM-YYYY"}
                         isOutsideRange={() => false}
                 />
+                    <button className="ui right floated toggle button" value={'0'} onClick={this.toggleEditMode} disabled={this.props.userName !== 'Admin'}>
+                        <i className="edit outline icon"></i>
+                        {this.state.editModeValue}
+                    </button>
                     <button className="ui right floated toggle button" value={'1'} onClick={this.toggleDayCount}>
                         <i className="filter icon"></i>
                         Toggle by Too Few People In

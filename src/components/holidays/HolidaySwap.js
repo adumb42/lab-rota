@@ -17,18 +17,27 @@ class HolidaySwap extends React.Component {
         const crewThree = this.props.holiday.crewThree
         const crewFour = this.props.holiday.crewFour
         const crewFive = this.props.holiday.crewFive
+        const crewSix = this.props.holiday.crewSix
+        const crewSeven = this.props.holiday.crewSeven
+        const crewEight = this.props.holiday.crewEight
         const getName = this.props.location.state.name
         const crewOneChange = () => this.props.nameToggle(_id, { "crewOne": null })
         const crewTwoChange = () => this.props.nameToggle(_id, { "crewTwo": null })
         const crewThreeChange = () => this.props.nameToggle(_id, { "crewThree": null })
         const crewFourChange = () => this.props.nameToggle(_id, { "crewFour": null })
         const crewFiveChange = () => this.props.nameToggle(_id, { "crewFive": null })
-        
+        const crewSixChange = () => this.props.nameToggle(_id, { "crewSix": null })
+        const crewSevenChange = () => this.props.nameToggle(_id, { "crewSeven": null })
+        const crewEightChange = () => this.props.nameToggle(_id, { "crewEight": null })
+
         let crewOneButton 
         let crewTwoButton 
         let crewThreeButton 
         let crewFourButton 
         let crewFiveButton 
+        let crewSixButton
+        let crewSevenButton
+        let crewEightButton
         let nameChange
 
         if (getName === this.props.users[0].userName) {
@@ -41,6 +50,12 @@ class HolidaySwap extends React.Component {
             nameChange = crewFourChange
         } if (getName === this.props.users[4].userName) {
             nameChange = crewFiveChange
+        } if (getName === 'Joe') {
+            nameChange = crewSixChange
+        } if (getName === 'Daiva') {
+            nameChange = crewSevenChange
+        } if (getName === 'Agnieszka') {
+            nameChange = crewEightChange
         }
 
         if (crewOne === null && getName !== this.props.users[0].userName) {
@@ -53,17 +68,34 @@ class HolidaySwap extends React.Component {
             crewFourButton = <button className="ui button" onClick={() => { this.props.nameToggle(_id, { "crewFour": true });}}>{this.props.users[3].userName}</button>
         } if (crewFive === null && getName !== this.props.users[4].userName) {
             crewFiveButton = <button className="ui button" onClick={() => { this.props.nameToggle(_id, { "crewFive": true });}}>{this.props.users[4].userName}</button>
+        } if (crewSix === null && getName !== 'Joe') {
+            crewSixButton = <button className="ui button" onClick={() => { this.props.nameToggle(_id, { "crewSix": true }); }}>Joe</button>
+        } if (crewSeven === null && getName !== 'Daiva') {
+            crewSevenButton = <button className="ui button" onClick={() => { this.props.nameToggle(_id, { "crewSeven": true }); }}>Daiva</button>
+        } if (crewEight === null && getName !== 'Agnieszka') {
+            crewEightButton = <button className="ui button" onClick={() => { this.props.nameToggle(_id, { "crewEight": true }); }}>Agnieszka</button>
         } 
 
-        return (
-            <div onClick={nameChange}>
-               {crewOneButton}
-               {crewTwoButton}
-               {crewThreeButton}
-               {crewFourButton}
-               {crewFiveButton}
-            </div>
-        );
+        if (getName === this.props.users[0].userName || getName === this.props.users[1].userName || getName === this.props.users[2].userName || getName === this.props.users[3].userName || getName === this.props.users[4].userName) {
+            return (
+                <div onClick={nameChange}>
+                    {crewOneButton}
+                    {crewTwoButton}
+                    {crewThreeButton}
+                    {crewFourButton}
+                    {crewFiveButton}
+                </div>
+                )
+            } 
+        else {
+            return (
+                <div onClick={nameChange}>
+                    {crewSixButton}
+                    {crewSevenButton}
+                    {crewEightButton}
+                </div>
+            )
+        }
     }
 
     render() {

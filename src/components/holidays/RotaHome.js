@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { DateRangePicker } from 'react-dates';
-import { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, crewSixBench, crewSevenBench, crewEightBench, fetchUser } from '../../actions';
+import { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, crewSixBench, crewSevenBench, crewEightBench, crewNineBench, fetchUser } from '../../actions';
 import { connect } from 'react-redux';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -30,7 +30,7 @@ class RotaHome extends React.Component {
     };
 
     onBenchChange = (e, i, id) => {
-        const bArr = ["crewOneBench", "crewTwoBench", "crewThreeBench", "crewFourBench", "crewFiveBench", "crewSixBench", "crewSevenBench", "crewEightBench"]
+        const bArr = ["crewOneBench", "crewTwoBench", "crewThreeBench", "crewFourBench", "crewFiveBench", "crewSixBench", "crewSevenBench", "crewEightBench", "crewNineBench"]
         let selectedCrew = bArr[i]
         if (selectedCrew === "crewOneBench") {
             this.props.crewOneBench(id, { "crewOneBench": parseInt(e.target.value) })
@@ -55,6 +55,9 @@ class RotaHome extends React.Component {
         }
         else if (selectedCrew === "crewEightBench") {
             this.props.crewEightBench(id, { "crewEightBench": parseInt(e.target.value) })
+        }
+        else if (selectedCrew === "crewNineBench") {
+            this.props.crewNineBench(id, { "crewNineBench": parseInt(e.target.value) })
         }
     }
 
@@ -133,11 +136,12 @@ class RotaHome extends React.Component {
             let crewSixButton
             let crewSevenButton
             let crewEightButton
-            const benchArr = [holiday.crewOneBench, holiday.crewTwoBench, holiday.crewThreeBench, holiday.crewFourBench, holiday.crewFiveBench, holiday.crewSixBench, holiday.crewSevenBench, holiday.crewEightBench]
-            const crewArr = [holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix, holiday.crewSeven, holiday.crewEight]
-            const buttonArr = [crewOneButton, crewTwoButton, crewThreeButton, crewFourButton, crewFiveButton, crewSixButton, crewSevenButton, crewEightButton]
+            let crewNineButton
+            const benchArr = [holiday.crewOneBench, holiday.crewTwoBench, holiday.crewThreeBench, holiday.crewFourBench, holiday.crewFiveBench, holiday.crewSixBench, holiday.crewSevenBench, holiday.crewEightBench, holiday.crewNineBench]
+            const crewArr = [holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix, holiday.crewSeven, holiday.crewEight, holiday.crewNine]
+            const buttonArr = [crewOneButton, crewTwoButton, crewThreeButton, crewFourButton, crewFiveButton, crewSixButton, crewSevenButton, crewEightButton, crewNineButton]
             const backgroundColorArr = [ {}, {}, {}, {}, {}, {}, {}, {}]
-            const colourArray = ["silver", "salmon", "khaki", "paleturquoise", "palegreen", "#ffb6c1", "grey", "#b8e6bf", "#d4af37", "red"]
+            const colourArray = ["silver", "salmon", "khaki", "paleturquoise", "palegreen", "#b8e6bf", "grey", "#b8e6bf", "#d4af37", "red"]
             const crewArrLength = crewArr.length
             const colourArrayLength = colourArray.length
             const buttonArrLength = buttonArr.length
@@ -175,7 +179,7 @@ class RotaHome extends React.Component {
                             <option value="5">OSS</option>
                             <option value="7">WILM</option>
                             <option value="8">PROCM</option>
-                            <option value="9">FLEX</option>
+                            <option value="9">FTRY</option>
                         </select>
                     }
                 else if (crewArr[i] === undefined) {
@@ -195,7 +199,7 @@ class RotaHome extends React.Component {
                     }
                 }
             
-            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix, holiday.crewSeven, holiday.crewEight])
+            let count = this.conditionalSum([holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix, holiday.crewSeven, holiday.crewEight, holiday.crewNine])
 
             while (
                 moment(holiday.date, 'DD-MM-YYYY').valueOf() > moment(this.state.startDate - 86400000) &&
@@ -229,6 +233,9 @@ class RotaHome extends React.Component {
                             </td>
                             <td style={backgroundColorArr[7]}>
                                 {buttonArr[7]}
+                            </td>
+                            <td style={backgroundColorArr[8]}>
+                                {buttonArr[8]}
                             </td>
                             <td>{count}</td>
                         </tr>
@@ -366,9 +373,10 @@ class RotaHome extends React.Component {
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[2].userName}</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[3].userName}</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>{this.props.users[4].userName}</th>
-                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Joe B</th>
+                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Joe</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Daiva</th>
-                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>A N Other</th>
+                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Agnieszka</th>
+                                <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Elaine</th>
                                 <th style={{ "position": "webkitSticky", /* Safari */ "position": "sticky", "top": 0, "zIndex": 1 }}>Count</th>
                             </tr>
                         </thead>
@@ -391,5 +399,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, crewSixBench, crewSevenBench, crewEightBench,fetchUser }
+    { fetchHolidays, nameToggle, fetchHoliday, crewOneBench, crewTwoBench, crewThreeBench, crewFourBench, crewFiveBench, crewSixBench, crewSevenBench, crewEightBench, crewNineBench, fetchUser }
 )(RotaHome);
