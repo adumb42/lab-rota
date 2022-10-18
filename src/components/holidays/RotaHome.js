@@ -141,7 +141,7 @@ class RotaHome extends React.Component {
             const crewArr = [holiday.crewOne, holiday.crewTwo, holiday.crewThree, holiday.crewFour, holiday.crewFive, holiday.crewSix, holiday.crewSeven, holiday.crewEight, holiday.crewNine]
             const buttonArr = [crewOneButton, crewTwoButton, crewThreeButton, crewFourButton, crewFiveButton, crewSixButton, crewSevenButton, crewEightButton, crewNineButton]
             const backgroundColorArr = [ {}, {}, {}, {}, {}, {}, {}, {}]
-            const colourArray = ["silver", "salmon", "khaki", "paleturquoise", "palegreen", "#b8e6bf", "grey", "#b8e6bf", "#d4af37", "red"]
+            const colourArray = ["silver", "salmon", "khaki", "paleturquoise", "palegreen", "#b8e6bf", "grey", "#b8e6bf", "#d4af37", "#32CD32", "#089000", "#32CD32"]
             const crewArrLength = crewArr.length
             const colourArrayLength = colourArray.length
             const buttonArrLength = buttonArr.length
@@ -178,8 +178,10 @@ class RotaHome extends React.Component {
                             <option value="4">UTI</option>
                             <option value="5">OSS</option>
                             <option value="7">WILM</option>
-                            <option value="8">PROCM</option>
-                            <option value="9">FTRY</option>
+                            <option value="8">ALGAE</option>
+                            <option value="9">FB 12D</option>
+                            <option value="10">FB 12N</option>
+                            <option value="11">FB 10D</option>
                         </select>
                     }
                 else if (crewArr[i] === undefined) {

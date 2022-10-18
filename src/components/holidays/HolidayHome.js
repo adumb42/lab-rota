@@ -413,6 +413,7 @@ class HolidayList extends React.Component {
                         </i>
                     </Link>
                 crewSixButton =
+                    this.state.editModeValue === 'Edit Mode Off' ? 
                     <Link
                         to={{
                             pathname: `/swap/${holiday.id}`,
@@ -428,38 +429,79 @@ class HolidayList extends React.Component {
                                     holiday.crewSix === "" ? "calendar times icon" : "calendar outline icon"))}>
                         </i>
                     </Link>
+                    :
+                    <button className="circular ui icon button"
+                        disabled={holiday.crewSix === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewSix === undefined || this.props.userName !== 'Joe' && this.state.editModeValue === 'Edit Mode Off'}
+                        onClick={() => {
+                            if (this.state.editModeValue === 'Edit Mode Off') {
+                                this.props.nameToggle(holiday._id, { "crewSix": !holiday.crewSix })
+                            } else {
+                                this.onClickFunction(6, holiday._id)
+                            }
+                        }}>
+                        <i className={classNameSix}>
+                        </i>
+                    </button>
                 crewSevenButton =
-                    <Link
-                        to={{
-                            pathname: `/swap/${holiday.id}`,
-                            state: {
-                                name: 'Daiva',
-                                id: holiday._id
-                            }
-                        }}
-                        className={this.props.userName !== 'Admin' || holiday.crewSeven !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
-                        <i className={
-                            holiday.crewSeven === true ? "calendar icon" :
-                                (holiday.crewSeven === false ? "calendar suitcase icon" : (
-                                    holiday.crewSeven === "" ? "calendar times icon" : "calendar outline icon"))}>
-                        </i>
-                    </Link>
+                    this.state.editModeValue === 'Edit Mode Off' ?
+                        <Link
+                            to={{
+                                pathname: `/swap/${holiday.id}`,
+                                state: {
+                                    name: 'Daiva',
+                                    id: holiday._id
+                                }
+                            }}
+                            className={this.props.userName !== 'Admin' || holiday.crewSeven !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                            <i className={
+                                holiday.crewSeven === true ? "calendar icon" :
+                                    (holiday.crewSeven === false ? "calendar suitcase icon" : (
+                                        holiday.crewSeven === "" ? "calendar times icon" : "calendar outline icon"))}>
+                            </i>
+                        </Link>
+                        :
+                        <button className="circular ui icon button"
+                            disabled={holiday.crewSeven === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewSeven === undefined || this.props.userName !== 'Daiva' && this.state.editModeValue === 'Edit Mode Off'}
+                            onClick={() => {
+                                if (this.state.editModeValue === 'Edit Mode Off') {
+                                    this.props.nameToggle(holiday._id, { "crewSeven": !holiday.crewSeven })
+                                } else {
+                                    this.onClickFunction(7, holiday._id)
+                                }
+                            }}>
+                            <i className={classNameSeven}>
+                            </i>
+                        </button>
                 crewEightButton =
-                    <Link
-                        to={{
-                            pathname: `/swap/${holiday.id}`,
-                            state: {
-                                name: 'Agnieszka',
-                                id: holiday._id
-                            }
-                        }}
-                        className={this.props.userName !== 'Admin' || holiday.crewEight !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
-                        <i className={
-                            holiday.crewEight === true ? "calendar icon" :
-                                (holiday.crewEight === false ? "calendar suitcase icon" : (
-                                    holiday.crewEight === "" ? "calendar times icon" : "calendar outline icon"))}>
-                        </i>
-                    </Link>
+                    this.state.editModeValue === 'Edit Mode Off' ?
+                        <Link
+                            to={{
+                                pathname: `/swap/${holiday.id}`,
+                                state: {
+                                    name: 'Agnieszka',
+                                    id: holiday._id
+                                }
+                            }}
+                            className={this.props.userName !== 'Admin' || holiday.crewEight !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                            <i className={
+                                holiday.crewEight === true ? "calendar icon" :
+                                    (holiday.crewEight === false ? "calendar suitcase icon" : (
+                                        holiday.crewEight === "" ? "calendar times icon" : "calendar outline icon"))}>
+                            </i>
+                        </Link>
+                        :
+                        <button className="circular ui icon button"
+                            disabled={holiday.Eight === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewEight === undefined || this.props.userName !== 'Agnieszka' && this.state.editModeValue === 'Edit Mode Off'}
+                            onClick={() => {
+                                if (this.state.editModeValue === 'Edit Mode Off') {
+                                    this.props.nameToggle(holiday._id, { "crewEight": !holiday.crewEight })
+                                } else {
+                                    this.onClickFunction(8, holiday._id)
+                                }
+                            }}>
+                            <i className={classNameEight}>
+                            </i>
+                        </button>
                 } else {
                 crewOneButton = 
                     <button className="circular ui icon button"
@@ -527,53 +569,95 @@ class HolidayList extends React.Component {
                     </i>
                     </button>
                 crewSixButton =
-                    <Link
-                        to={{
-                            pathname: `/swap/${holiday.id}`,
-                            state: {
-                                name: 'Joe',
-                                id: holiday._id
-                            }
-                        }}
-                        className={this.props.userName !== 'Admin' || holiday.crewSix !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
-                        <i className={
-                            holiday.crewSix === true ? "calendar icon" :
-                                (holiday.crewSix === false ? "calendar suitcase icon" : (
-                                    holiday.crewSix === "" ? "calendar times icon" : "calendar outline icon"))}>
-                        </i>
-                    </Link>
+                    this.state.editModeValue === 'Edit Mode Off' ?
+                        <Link
+                            to={{
+                                pathname: `/swap/${holiday.id}`,
+                                state: {
+                                    name: 'Joe',
+                                    id: holiday._id
+                                }
+                            }}
+                            className={this.props.userName !== 'Admin' || holiday.crewSix !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                            <i className={
+                                holiday.crewSix === true ? "calendar icon" :
+                                    (holiday.crewSix === false ? "calendar suitcase icon" : (
+                                        holiday.crewSix === "" ? "calendar times icon" : "calendar outline icon"))}>
+                            </i>
+                        </Link>
+                        :
+                        <button className="circular ui icon button"
+                            disabled={holiday.crewSix === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewSix === undefined || this.props.userName !== 'Joe' && this.state.editModeValue === 'Edit Mode Off'}
+                            onClick={() => {
+                                if (this.state.editModeValue === 'Edit Mode Off') {
+                                    this.props.nameToggle(holiday._id, { "crewSix": !holiday.crewSix })
+                                } else {
+                                    this.onClickFunction(6, holiday._id)
+                                }
+                            }}>
+                            <i className={classNameSix}>
+                            </i>
+                        </button>
                 crewSevenButton =
-                    <Link
-                        to={{
-                            pathname: `/swap/${holiday.id}`,
-                            state: {
-                                name: 'Daiva',
-                                id: holiday._id
-                            }
-                        }}
-                        className={this.props.userName !== 'Admin' || holiday.crewSeven !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
-                        <i className={
-                            holiday.crewSeven === true ? "calendar icon" :
-                                (holiday.crewSeven === false ? "calendar suitcase icon" : (
-                                    holiday.crewSeven === "" ? "calendar times icon" : "calendar outline icon"))}>
-                        </i>
-                    </Link>
+                    this.state.editModeValue === 'Edit Mode Off' ?
+                        <Link
+                            to={{
+                                pathname: `/swap/${holiday.id}`,
+                                state: {
+                                    name: 'Daiva',
+                                    id: holiday._id
+                                }
+                            }}
+                            className={this.props.userName !== 'Admin' || holiday.crewSeven !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                            <i className={
+                                holiday.crewSeven === true ? "calendar icon" :
+                                    (holiday.crewSeven === false ? "calendar suitcase icon" : (
+                                        holiday.crewSeven === "" ? "calendar times icon" : "calendar outline icon"))}>
+                            </i>
+                        </Link>
+                        :
+                        <button className="circular ui icon button"
+                            disabled={holiday.crewSeven === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewSeven === undefined || this.props.userName !== 'Daiva' && this.state.editModeValue === 'Edit Mode Off'}
+                            onClick={() => {
+                                if (this.state.editModeValue === 'Edit Mode Off') {
+                                    this.props.nameToggle(holiday._id, { "crewSeven": !holiday.crewSeven })
+                                } else {
+                                    this.onClickFunction(7, holiday._id)
+                                }
+                            }}>
+                            <i className={classNameSeven}>
+                            </i>
+                        </button>
                 crewEightButton =
-                    <Link
-                        to={{
-                            pathname: `/swap/${holiday.id}`,
-                            state: {
-                                name: 'Agnieszka',
-                                id: holiday._id
-                            }
-                        }}
-                        className={this.props.userName !== 'Admin' || holiday.crewEight !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
-                        <i className={
-                            holiday.crewEight === true ? "calendar icon" :
-                                (holiday.crewEight === false ? "calendar suitcase icon" : (
-                                    holiday.crewEight === "" ? "calendar times icon" : "calendar outline icon"))}>
-                        </i>
-                    </Link>
+                    this.state.editModeValue === 'Edit Mode Off' ?
+                        <Link
+                            to={{
+                                pathname: `/swap/${holiday.id}`,
+                                state: {
+                                    name: 'Agnieszka',
+                                    id: holiday._id
+                                }
+                            }}
+                            className={this.props.userName !== 'Admin' || holiday.crewEight !== true ? `disabled circular ui icon button` : `circular ui icon button restore-${holiday.id}`}>
+                            <i className={
+                                holiday.crewEight === true ? "calendar icon" :
+                                    (holiday.crewEight === false ? "calendar suitcase icon" : (
+                                        holiday.crewEight === "" ? "calendar times icon" : "calendar outline icon"))}>
+                            </i>
+                        </Link>
+                        :
+                        <button className="circular ui icon button"
+                            disabled={holiday.Eight === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewEight === undefined || this.props.userName !== 'Agnieszka' && this.state.editModeValue === 'Edit Mode Off'}
+                            onClick={() => {
+                                if (this.state.editModeValue === 'Edit Mode Off') {
+                                    this.props.nameToggle(holiday._id, { "crewEight": !holiday.crewEight })
+                                } else {
+                                    this.onClickFunction(8, holiday._id)
+                                }
+                            }}>
+                            <i className={classNameEight}>
+                            </i>
+                        </button>
                 crewNineButton =
                     <button className="circular ui icon button"
                         disabled={holiday.crewNine === null && this.state.editModeValue === 'Edit Mode Off' || holiday.crewNine === undefined || this.props.userName !== 'Elaine' && this.state.editModeValue === 'Edit Mode Off'}
