@@ -61,4 +61,4 @@ jobs:
           app-name: 'lab-rota-app'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_540F61A8CE0147D68A80025FD4C92721 }}
-          package: .
+          package: release.zip
