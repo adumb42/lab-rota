@@ -61,4 +61,4 @@ jobs:
           app-name: 'wislab-rota'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_417F41A1B915407783FC5508C62E9305 }}
-          package: .
+          package: release.zip
