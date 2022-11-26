@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - lab-rota-app
+name: Build and deploy Node.js app to Azure Web App - wislab-rota
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '16.x'
 
       - name: npm install, build, and test
         run: |
@@ -40,7 +40,7 @@ jobs:
         with:
           name: node-app
           path: release.zip
-
+          
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -60,5 +60,5 @@ jobs:
         with:
           app-name: 'wislab-rota'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_11FDC4E237E1415A820074B19D08295E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_417F41A1B915407783FC5508C62E9305 }}
           package: release.zip
